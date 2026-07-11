@@ -45,21 +45,22 @@ streak_raw = requests.get("https://macondo.hackclub.com/api/profile/streaks", he
 streak_json = streak_raw.json()
 me_json = me_raw.json()
 gold_json = gold_raw.json()
-print(streak_json)
 print("")
 for i, line in enumerate(lines):
     textthing = macondoyellow + line + reset
-    if i == 1:
+    if i == 0:
         print(f"{textthing}{me_json.get("username")}@macondo")
-    elif i == 2:
+    elif i == 1:
         print(f"{textthing}-----------------------")
-    elif i == 3:
+    elif i == 2:
         print(f"{textthing}Slack ID: {me_json.get('slack_id')}")
-    elif i == 4:
+    elif i == 3:
         print(f"{textthing}Balance: {gold_json.get('balance')}")
-    elif i == 5:
+    elif i == 4:
         print(f"{textthing}Streak: {streak_json.get('current_streak')}")
+    elif i == 5:
+        print(f"{textthing}Longest streak: {me_json.get('longest_current_streak')}")
     elif i == 6:
-
+        print(f"{textthing}Streak freezes remaining: {me_json.get('streak_freezes_remaining')}")
     else:
         print(textthing)
