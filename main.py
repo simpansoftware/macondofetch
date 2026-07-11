@@ -45,7 +45,6 @@ streak_raw = requests.get("https://macondo.hackclub.com/api/profile/streaks", he
 streak_json = streak_raw.json()
 me_json = me_raw.json()
 gold_json = gold_raw.json()
-print("")
 for i, line in enumerate(lines):
     textthing = macondoyellow + line + reset
     if i == 0:
@@ -62,5 +61,12 @@ for i, line in enumerate(lines):
         print(f"{textthing}Longest streak: {me_json.get('longest_current_streak')}")
     elif i == 6:
         print(f"{textthing}Streak freezes remaining: {me_json.get('streak_freezes_remaining')}")
+    elif i == 7:
+        if streak_json.get('today_seconds_logged') >= streak_json.get('daily_goal_seconds'):
+            print(f"{textthing}You have worked 100% of your daily goal ({streak_json.get('daily_goal_seconds') / 3600} hours)")
+        else:
+            print(f"{textthing}You have worked {round(streak_json.get('today_seconds_logged') / streak_json.get('daily_goal_seconds') * 100)}% of your daily goal ({round(streak_json.get('today_seconds_logged') / 60)} minutes)")
+    elif i == 8:
+        print(f"{textthing}Projects: {len(streak_json.get('projects'))}")        
     else:
         print(textthing)
