@@ -64,8 +64,6 @@ try:
     gold_raw = session.get("https://macondo.hackclub.com/api/users/balance", timeout=10)
     starfruit_raw = session.get("https://macondo.hackclub.com/api/users/starfruit", timeout=10)
     streak_raw = session.get("https://macondo.hackclub.com/api/profile/streaks", timeout=10)
-    shop_raw = session.get("https://macondo.hackclub.com/api/shop/items", timeout=10)
-    shop_json = shop_raw.json()
     starfruit_json = starfruit_raw.json()
     streak_json = streak_raw.json()
     me_json = me_raw.json()
@@ -90,14 +88,12 @@ for i, line in enumerate(lines):
     elif i == 5:
         print(f"{textthing}{macondoyellow}Starfruit earnt in your lifetime:{reset} {starfruit_json.get('lifetime_earned')}")
     elif i == 6:
-        print(f"{textthing}{macondoyellow}Shop items:{reset} {len(shop_json.get('items'))}")
-    elif i == 7:
         print(f"{textthing}{macondoyellow}Streak:{reset} {streak_json.get('current_streak')}")
-    elif i == 8:
+    elif i == 7:
         print(f"{textthing}{macondoyellow}Longest streak:{reset} {me_json.get('longest_current_streak')}")
-    elif i == 9:
+    elif i == 8:
         print(f"{textthing}{macondoyellow}Streak freezes remaining:{reset} {me_json.get('streak_freezes_remaining')}")
-    elif i == 10:
+    elif i == 9:
         if streak_json.get('today_seconds_logged') >= streak_json.get('daily_goal_seconds'):
             thingamajig = f"{textthing}{macondoyellow}You have worked 100% of your daily goal{reset} (Goal is {round(streak_json.get('daily_goal_seconds') / 3600)} hour" # welcome to cursed hacks 101 where we do cursed hacks
             if round(streak_json.get('daily_goal_seconds') / 3600) == 1:
@@ -109,7 +105,7 @@ for i, line in enumerate(lines):
             initminute = round(streak_json.get('today_seconds_logged') / 60)
             goal = round(streak_json.get('daily_goal_seconds') / 60)
             print(f"{textthing}{macondoyellow}You have worked {percentage}% of your daily goal{reset} ({initminute} minutes out of {goal} minutes)")
-    elif i == 11:
+    elif i == 10:
         print(f"{textthing}{macondoyellow}Projects: {reset}{len(streak_json.get('projects'))}")        
     elif i == 13:
         print(f"{textthing}{macondoyellow}██{red}██{green}██{yellow}██{blue}██{magenta}██{cyan}██{reset}")
